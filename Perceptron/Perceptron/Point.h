@@ -15,6 +15,9 @@ class Point {
 private:
 	float Px, Py;
 	float CR, CG;
+
+	void drawAt(float, float);
+
 public:
 	//Constructor
 	Point();
@@ -31,8 +34,8 @@ public:
 	void SetRBG(bool);
 
 	//Functions
-	void draw();
-	void drawOffset();
+	void draw(int, int);
+	void drawOffset(int, int);
 
 	//Operator Overloading
 	bool operator==(const Point&)const;
@@ -70,12 +73,22 @@ void Point::SetRBG(bool correct) {
 float Point::GetX()const { return Px; }
 float Point::GetY()const { return Py; }
 
-void Point::draw() {
+inline void Point::drawAt(float x, float y){
 
 }
 
-void Point::drawOffset() {
+void Point::draw(int h, int v) {
+	drawAt(Px/(float)h, Py/(float)v);
+}
 
+void Point::drawOffset(int h, int v) {
+	float Compression = 0.9;
+	float Shift = 1.0 - Compression;
+
+	float X = (float)((((Px + v) / 2) * Compression) + Shift);
+	float Y = (float)((((Py + h) / 2) * Compression) + Shift);
+
+	drawAt(X, Y);
 }
 
 
@@ -95,8 +108,8 @@ public:
 	~PointStash();
 
 	void add(Point);
-	void Draw();
-	void DrawOffset();
+	void Draw(int, int);
+	void DrawOffset(int, int);
 
 	bool Contains(Point);
 };
@@ -113,14 +126,14 @@ void PointStash::add(Point a) {
 	List.push_back(a);
 }
 
-inline void PointStash::Draw(){
+inline void PointStash::Draw(int h, int v){
 	for (std::vector<Point>::iterator it = List.begin(); it != List.end(); ++it)
-		it->draw();
+		it->draw(h,v);
 }
 
-inline void PointStash::DrawOffset() {
+inline void PointStash::DrawOffset(int h, int v) {
 	for (std::vector<Point>::iterator it = List.begin(); it != List.end(); ++it)
-		it->drawOffset();
+		it->drawOffset(h, v);
 }
 
 bool PointStash::Contains(Point a) {

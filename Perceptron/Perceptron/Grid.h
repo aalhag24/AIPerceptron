@@ -109,14 +109,14 @@ void Grid::drawOrigin() {
 	}
 
 	///DRAW POINTS as normal
-	Inventory.Draw();
+	Inventory.Draw(Horizontal, Vertical);
 }
 
 void Grid::drawCorner() {
 	///DRAW OFFSET GRID
 
 	///DRAW OFFSET POINTS
-	Inventory.DrawOffset();
+	Inventory.DrawOffset(Horizontal, Vertical);
 }
 
 #endif // !GRID_H
