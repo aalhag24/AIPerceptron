@@ -71,7 +71,7 @@ float Point::GetY()const { return Py; }
 
 /** Functions **/
 bool Point::operator==(const Point &a)const {
-	if (this->Px == a.Px)
+	if (this->Px == a.Px && this->Py == a.Py)
 		return true;
 	return false;
 }

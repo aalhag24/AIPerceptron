@@ -6,6 +6,15 @@
 #include <freeglut.h>
 #endif // !FREEGLUT_H
 
+#ifndef POINT_H
+#include "Point.h"
+#endif // !POINT_H
+
+#ifndef STDLIB_H
+#include <stdlib.h>
+#endif // !STDLIB_H
+
+
 #ifndef GRID_H
 #define GRID_H
 
@@ -17,20 +26,23 @@ class Grid {
 	void drawOrigin();
 	void drawCorner();
 
+	PointStash Inventory;
+
 public:
 	Grid();
 	Grid(int, int, bool);
 	Grid(const Grid&);
 
-	virtual int GetVertical()const;
-	virtual int GetHorizontal()const;
+	int GetVertical()const;
+	int GetHorizontal()const;
 
-	virtual void SetVertical(int);
-	virtual void SetHorizontal(int);
+	void SetVertical(int);
+	void SetHorizontal(int);
 
-	virtual void draw();
-	virtual void Contain(int, int);
-	virtual void SetState(bool);
+	void draw();
+	void SetState(bool);
+
+	void GeneratePoints(int);
 };
 
 Grid::Grid() {
@@ -66,8 +78,8 @@ void Grid::SetHorizontal(int a) {
 	Horizontal = a;
 }
 
-void Grid::SetState(bool) {
-
+void Grid::SetState(bool Origin) {
+	State = Origin;
 }
 
 void Grid::draw() {
@@ -79,9 +91,6 @@ void Grid::draw() {
 	}
 }
 
-void Grid::Contain(int x, int y) {
-
-}
 
 void Grid::drawOrigin() {
 	float Spread = (float)(1.0 / GetHorizontal());
@@ -99,9 +108,25 @@ void Grid::drawOrigin() {
 		glVertex2f(-1.0, i);
 		glEnd();
 	}
+
+	///DRAW POINTS as normal
 }
 
 void Grid::drawCorner() {
+	///DRAW OFFSET GRID
 
+	///DRAW OFFSET POINTS
+}
+
+void Grid::GeneratePoints(int n) {
+	Point a;
+	float v = GetVertical();
+	float h = GetHorizontal();
+	int i = 0;
+	do{
+		a.SetX((rand() % (2*h) - 9) / h);
+		a.SetY((rand() % (2*v) - 9) / v);
+		if (!Inventory.Contains(a)) { Inventory.add(a); i++;  }
+	while (i < n);
 }
 #endif // !GRID_H
