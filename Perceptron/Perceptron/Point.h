@@ -31,6 +31,8 @@ public:
 	void SetRBG(bool);
 
 	//Functions
+	void draw();
+	void drawOffset();
 
 	//Operator Overloading
 	bool operator==(const Point&)const;
@@ -68,6 +70,14 @@ void Point::SetRBG(bool correct) {
 float Point::GetX()const { return Px; }
 float Point::GetY()const { return Py; }
 
+void Point::draw() {
+
+}
+
+void Point::drawOffset() {
+
+}
+
 
 /** Functions **/
 bool Point::operator==(const Point &a)const {
@@ -85,6 +95,9 @@ public:
 	~PointStash();
 
 	void add(Point);
+	void Draw();
+	void DrawOffset();
+
 	bool Contains(Point);
 };
 
@@ -98,6 +111,16 @@ PointStash::~PointStash(){
 
 void PointStash::add(Point a) {
 	List.push_back(a);
+}
+
+inline void PointStash::Draw(){
+	for (std::vector<Point>::iterator it = List.begin(); it != List.end(); ++it)
+		it->draw();
+}
+
+inline void PointStash::DrawOffset() {
+	for (std::vector<Point>::iterator it = List.begin(); it != List.end(); ++it)
+		it->drawOffset();
 }
 
 bool PointStash::Contains(Point a) {

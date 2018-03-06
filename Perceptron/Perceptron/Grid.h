@@ -62,24 +62,23 @@ Grid::Grid(const Grid & Old) {
 	Horizontal = Old.GetHorizontal();
 }
 
-int Grid::GetVertical()const {
-	return Vertical;
-}
+int Grid::GetVertical()const { return Vertical; }
+int Grid::GetHorizontal()const { return Horizontal; }
 
-int Grid::GetHorizontal()const {
-	return Horizontal;
-}
+void Grid::SetVertical(int b) { Vertical = b; }
+void Grid::SetHorizontal(int a) { Horizontal = a; }
+void Grid::SetState(bool Origin) { State = Origin; }
 
-void Grid::SetVertical(int b) {
-	Vertical = b;
-}
-
-void Grid::SetHorizontal(int a) {
-	Horizontal = a;
-}
-
-void Grid::SetState(bool Origin) {
-	State = Origin;
+inline void Grid::GeneratePoints(int n){
+	Point a;
+	float v = GetVertical();
+	float h = GetHorizontal();
+	int i = 0;
+	do {
+		a.SetX((rand() % (2 * h) - 9) / h);
+		a.SetY((rand() % (2 * v) - 9) / v);
+		if (!Inventory.Contains(a)) { Inventory.add(a); i++; }
+	}while (i < n);
 }
 
 void Grid::draw() {
@@ -110,23 +109,14 @@ void Grid::drawOrigin() {
 	}
 
 	///DRAW POINTS as normal
+	Inventory.Draw();
 }
 
 void Grid::drawCorner() {
 	///DRAW OFFSET GRID
 
 	///DRAW OFFSET POINTS
+	Inventory.DrawOffset();
 }
 
-void Grid::GeneratePoints(int n) {
-	Point a;
-	float v = GetVertical();
-	float h = GetHorizontal();
-	int i = 0;
-	do{
-		a.SetX((rand() % (2*h) - 9) / h);
-		a.SetY((rand() % (2*v) - 9) / v);
-		if (!Inventory.Contains(a)) { Inventory.add(a); i++;  }
-	while (i < n);
-}
 #endif // !GRID_H
