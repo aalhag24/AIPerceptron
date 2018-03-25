@@ -1,11 +1,14 @@
 #include "App.h"
 #include "stdafx.h"
+#include <freeglut.h>
+
 
 
 App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w, h) {
 	// Initialize state variables
 	mx = 0.0;
 	my = 0.0;
+	Layout.GeneratePoints(4);
 }
 
 void App::draw() {

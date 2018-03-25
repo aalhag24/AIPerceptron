@@ -1,13 +1,14 @@
-#include "stdafx.h"
-#include <iostream>
-
-#ifndef VECTOR_H
-#include <vector>
-#endif // !VECTOR_H
-
 #ifndef POINT_H
 #define POINT_H
 
+#include "stdafx.h"
+#include <iostream>
+#include <vector>
+#include <cmath> 
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 /// REMOVE THIS LATTER
 using namespace std;
 
@@ -15,6 +16,7 @@ class Point {
 private:
 	float Px, Py;
 	float CR, CG;
+	bool Active;
 
 	void drawAt(float, float);
 
@@ -31,7 +33,7 @@ public:
 
 	void SetX(float);
 	void SetY(float);
-	void SetRBG(bool);
+	void SetState(bool);
 
 	//Functions
 	void draw(int, int);
@@ -65,15 +67,27 @@ Point::~Point() {
 /** GETTERS AND SETTERS **/
 void Point::SetX(float x) { Px = x; }
 void Point::SetY(float y) { Py = y; }
-void Point::SetRBG(bool correct) { 
+void Point::SetState(bool correct) { 
 	if (correct) { CR = 0.0; CG = 1.0; }
 	else { CR = 1.0; CG = 0.0; }
+	Active = correct;
 }
 
 float Point::GetX()const { return Px; }
 float Point::GetY()const { return Py; }
 
-inline void Point::drawAt(float x, float y){
+inline void Point::drawAt(float X, float Y){
+	glColor3d(CR, CG, 0.0);
+	float radius = 0.1;
+
+	glBegin(GL_LINE_LOOP);
+	for (int i = 0; i <= 30; i++) {
+		float angle = 2.0 * M_PI * i / 30.0;
+		float x = cos(angle)*radius;
+		float y = sin(angle)*radius;
+		glVertex2f(x+X, y+y);
+	}
+	glEnd();
 
 }
 

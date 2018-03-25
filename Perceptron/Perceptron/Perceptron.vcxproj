@@ -78,9 +78,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Program Files\Archive\Coding\Neural Network\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\Program Files\Archive\Coding\Neural Network\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\Program Files\Archive\Coding\Neural Network\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="GlutApp.cpp" />
+    <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Perceptron.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
