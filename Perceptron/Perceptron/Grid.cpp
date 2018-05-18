@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Grid.h"
 #include <stdlib.h>
 #include <freeglut.h>
@@ -26,14 +27,18 @@ void Grid::SetVertical(int b) { Vertical = b; }
 void Grid::SetHorizontal(int a) { Horizontal = a; }
 void Grid::SetState(bool Origin) { State = Origin; }
 
-inline void Grid::GeneratePoints(int n) {
-	Point a;
-	float v = GetVertical();
-	float h = GetHorizontal();
+void Grid::GeneratePoints(int n) {
+	cout << "Generating new Points" << endl;
+	Point *a;
+	float v = Vertical;
+	float h = Horizontal;
+	float x, y;
 	int i = 0;
 	do {
-		a.SetX((rand() % (int)(2 * h) - 9) / h);
-		a.SetY((rand() % (int)(2 * v) - 9) / v);
+		y = (float)((rand() % (int)(2 * v)) - v);
+		x = (float)((rand() % (int)(2 * h)) - h);
+		cout << "At " << x << " " << y << endl;
+		a = new Point(x, y);
 		if (!Inventory.Contains(a)) { Inventory.add(a); i++; }
 	} while (i < n);
 }
@@ -49,19 +54,33 @@ void Grid::draw() {
 
 
 void Grid::drawOrigin() {
-	float Spread = (float)(1.0 / GetHorizontal());
-	for (float i = -1.0; i <= 1.0; i = i + Spread) {
+	glColor3f(1.0, 0.0, 0.0);
+	{
 		glBegin(GL_LINES);
-		glVertex2f(i, -1.0);
-		glVertex2f(i, 1.0);
+		glVertex2f(1.0, 0.0);
+		glVertex2f(-1.0, 0.0);
+		glEnd();
+
+		glBegin(GL_LINES);
+		glVertex2f(0.0, -1.0);
+		glVertex2f(0.0, 1.0);
 		glEnd();
 	}
 
-	Spread = (float)(1.0 / GetVertical());
+	glColor3f(1.0, 1.0, 1.0);
+	float Spread = (float)(1.0 / Horizontal);
 	for (float i = -1.0; i <= 1.0; i = i + Spread) {
 		glBegin(GL_LINES);
-		glVertex2f(1.0, i);
-		glVertex2f(-1.0, i);
+			glVertex2f(i, -1.0);
+			glVertex2f(i, 1.0);
+		glEnd();
+	}
+
+	Spread = (float)(1.0 / Vertical);
+	for (float i = -1.0; i <= 1.0; i = i + Spread) {
+		glBegin(GL_LINES);
+			glVertex2f(1.0, i);
+			glVertex2f(-1.0, i);
 		glEnd();
 	}
 
@@ -72,15 +91,15 @@ void Grid::drawOrigin() {
 void Grid::drawCorner() {
 	///DRAW OFFSET GRID
 	glBegin(GL_LINES);
-	glVertex2f(-0.9, -1.0);
-	glVertex2f(-0.9, 1.0);
+		glVertex2f(-(GLfloat)0.9, -(GLfloat)1.0);
+		glVertex2f(-(GLfloat)0.9, (GLfloat)1.0);
 	glEnd();
 
 	glBegin(GL_LINES);
-	glVertex2f(-1.0, -0.9);
-	glVertex2f(1.0, -0.9);
+		glVertex2f(-(GLfloat)1.0, -(GLfloat)0.9);
+		glVertex2f((GLfloat)1.0, -(GLfloat)0.9);
 	glEnd();
 
 	///DRAW OFFSET POINTS
-	Inventory.DrawOffset(Horizontal, Vertical);
+	//Inventory.DrawOffset(Horizontal, Vertical);
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\soil.1.16.0\build\native\soil.props" Condition="Exists('..\packages\soil.1.16.0\build\native\soil.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -78,9 +79,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -166,18 +167,21 @@
     <ClInclude Include="Point.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TexRect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="GlutApp.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Perceptron.cpp" />
+    <ClCompile Include="Point.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TexRect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -193,5 +197,6 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.redist.0.1.0.1\build\native\nupengl.core.redist.targets'))" />
     <Error Condition="!Exists('..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\nupengl.core.0.1.0.1\build\native\nupengl.core.targets'))" />
+    <Error Condition="!Exists('..\packages\soil.1.16.0\build\native\soil.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\soil.1.16.0\build\native\soil.props'))" />
   </Target>
 </Project>
