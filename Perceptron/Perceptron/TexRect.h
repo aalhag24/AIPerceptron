@@ -18,9 +18,11 @@ public:
     float y;
     float w;
     float h;
-	GLuint texture_id;
-	GLuint Green;
-	GLuint Red;
+
+	const char* Red;
+	const char* Green;
+
+	GLuint Color;
 
 
     TexRect (const char*, float, float, float, float);
@@ -30,22 +32,9 @@ public:
 	void drawPoint(bool);
     
     bool contains(float, float);
-    
-    void moveUp(float rate=0.01);
-    void moveDown(float rate=0.01);
-    void moveLeft(float rate=0.01);
-    void moveRight(float rate=0.01);
 
 	void setX(float);
 	void setY(float);
-    
-    void jump();
-    
-    bool rising;
-    bool movingLeft;
-   
-    float xinc;
-    float yinc;
 };
 
 #endif

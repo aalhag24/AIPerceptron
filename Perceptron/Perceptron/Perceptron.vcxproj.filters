@@ -33,13 +33,13 @@
     <ClInclude Include="Grid.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Neuron.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Point.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TexRect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -65,8 +65,19 @@
     <ClCompile Include="Point.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Green.png">
+      <Filter>Header Files\Images</Filter>
+    </Image>
+    <Image Include="Red.png">
+      <Filter>Header Files\Images</Filter>
+    </Image>
   </ItemGroup>
 </Project>

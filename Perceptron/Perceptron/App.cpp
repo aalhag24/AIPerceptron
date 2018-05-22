@@ -4,12 +4,10 @@
 static App* MF;
 
 void app_timer(int value) {
-
-
+	
 	MF->redraw();
 	glutTimerFunc(32, app_timer, value);
 }
-
 
 App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w, h) {
 	// Initialize state variables
@@ -18,22 +16,17 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 	mx = 0.0;
 	my = 0.0;
 
-	Layout = new Grid(16,16,true);
-	Layout->GeneratePoints(4);
+	Layout = new Grid();
+	Layout->GeneratePoints(50);
 
-	/**
-	explode(0);
-	glutTimerFunc(20, move, 1);
-	**/
-
+	//Apply Timing For AI
 	app_timer(1);
 }
-
 void App::specialKeyPress(int key) {
 	///Layout->specialKeyPressHandle(key);
 }
-
-void App::specialKeyUp(int key) {}
+void App::specialKeyUp(int key) {
+}
 
 void App::draw() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -59,7 +52,6 @@ void App::mouseDown(float x, float y) {
 	// Redraw the scene
 	redraw();
 }
-
 void App::mouseDrag(float x, float y) {
 	mx = x;
 	my = y;
@@ -67,12 +59,9 @@ void App::mouseDrag(float x, float y) {
 	// Redraw the scene
 	redraw();
 }
-
-void App::idle() {
-	redraw();
-}
-
 void App::keyPress(unsigned char key) {
 	///MainFrame->keyPressHandle(key);
 }
-
+void App::idle() {
+	redraw();
+}

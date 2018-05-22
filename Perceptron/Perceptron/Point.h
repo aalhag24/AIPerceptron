@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
+#include <freeglut.h>
 #include <cmath> 
 
 #ifndef M_PI
@@ -18,38 +20,40 @@ using namespace std;
 class Point {
 private:
 	float Px, Py;
-	TexRect *Image;
+	float APx, APy;
+	float CR, CG, CB;
+	float weight[2];
 	bool Active;
 
-	float Compression = 0.9f;
-	float Shift = 1.0f - Compression;
-
 	void drawAt(float, float);
+	void RandomizeWeight();
+	int guess(float[]);
+	int sign(float);
 
 public:
 	//Constructor
 	Point();
 	Point(float, float);
+	Point(float, float, bool);
 	Point(const Point&);
 	~Point();
 
 	//Getters and Setters
 	float GetX()const;
 	float GetY()const;
+	bool GetState()const;
 
 	void SetX(float);
 	void SetY(float);
 	void SetState(bool);
-	bool GetState()const;
 
 	//Functions
 	void draw(int, int);
-	void drawOffset(int, int);
 
 	//Operator Overloading
 	bool operator==(const Point&)const;
+	bool contain(float, float);
 };
-
 
 class PointStash {
 	std::vector<Point*> List;
@@ -59,9 +63,9 @@ public:
 
 	void add(Point*);
 	void Draw(int, int);
-	void DrawOffset(int, int);
 
 	bool Contains(Point*);
+	bool Contains(float, float);
 };
 
 
