@@ -17,7 +17,7 @@
 using namespace std;
 
 struct Point {
-	float Px, Py;
+	float Px, Py, RPx, RPy;
 	float CR, CG, CB;
 	bool Active;
 	Point() :Px(0.0f), Py(0.0f) { SetState(false); }
@@ -28,6 +28,9 @@ struct Point {
 		Active = correct;
 		if (correct) { CR = 0.0f; CG = 1.0f; CB = 0.0f; }
 		else{ CR = 1.0f; CG = 0.0f; CB = 0.0f; }
+	}
+	void SetRelative(int H, int V) {
+		RPx = Px / H; RPy = Py / V;
 	}
 	bool operator==(const Point& p)const {
 		if (Px == p.Px && Py == p.Py)
@@ -46,8 +49,8 @@ private:
 	float weight[2];
 	int length;
 
-	void drawAt(Point*,int,int);
-	void RandomizeWeight();
+	void drawAt(Point*);
+	void RandWeight();
 	int guess(float[]);
 	int sign(float);
 
@@ -59,7 +62,7 @@ public:
 	~Neuron();
 
 	//Functions
-	void draw(int, int);
+	void draw();
 	void GeneratePoints(int, int, int);
 
 	//Operator Overloading

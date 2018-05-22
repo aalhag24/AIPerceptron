@@ -13,8 +13,7 @@ Line::Line(int v, bool s = false){
 	float w = random(1, 10);
 	float z = random(1, 40);
 	this->m = (float)w / (float)z;
-	//this->b = (rand() % (2 * v)) - (float)v;
-		cout << this->m << endl;
+		cout << "Slope " << this->m << endl;
 }
 
 Line::Line(float m, float b){
