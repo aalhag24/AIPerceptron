@@ -16,11 +16,31 @@
 /// REMOVE THIS LATTER
 using namespace std;
 
-class Neuron {
-private:
+struct Point {
 	float Px, Py;
 	float APx, APy;
 	float CR, CG, CB;
+	Point() :Px(0.0f), Py(0.0f),
+		APx(0.0f), APy(0.0f),
+		CR(0.0f), CB(0.0f), CG(0.0f) {}
+	Point(float x, float y): Px(x), Py(y),
+		APx(0.0f), APy(0.0f),
+		CR(0.0f), CB(0.0f), CG(0.0f) {}
+	Point(float x, float y, float r, float g, float b): 
+		Px(x), Py(y),
+		APx(0.0f), APy(0.0f),
+		CR(r), CB(b), CG(g) {}
+	void SetAbs(float h, float v) {
+		APx = Px + h; APy = Py + v;
+	}
+	void SetColor(float r, float g, float b){
+		CR = r; CG = g; CB = b;
+	}
+};
+
+class Neuron {
+private:
+	Point *P;
 	float weight[2];
 	int length;
 	bool Active;

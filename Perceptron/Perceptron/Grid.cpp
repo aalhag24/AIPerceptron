@@ -16,6 +16,7 @@ Grid::Grid() {
 		Real->setup(Horizontal);
 	Est = new Line(Vertical, false);
 		Est->setup(Horizontal);
+
 }
 Grid::Grid(int x, int y) {
 	Horizontal = x;
@@ -41,23 +42,10 @@ int Grid::GetHorizontal()const { return Horizontal; }
 void Grid::SetVertical(int b) { Vertical = b; }
 void Grid::SetHorizontal(int a) { Horizontal = a; }
 
-void Grid::GeneratePoints(int n) {
-	Neuron *a;
-	int i = 0;
-	a = new Neuron(0, 0, true);
-	Inventory.add(a);
-	float v = (float)Vertical, h = (float)Horizontal, x, y;
-	do {
-		y = (float)((rand() % (int)(2 * v)) - v);
-		x = (float)((rand() % (int)(2 * h)) - h);
-		//cout << "New Point: " << x << " " << y << endl;
-		if (!Inventory.Contains(x,y)) { a = new Neuron(x, y);  Inventory.add(a); i++; }
-	} while (i < n);
-}
 void Grid::draw() {
 	///DRAW POINTS as normal
 	Inventory.Draw(Horizontal, Vertical);
-	
+
 	///DRAW LINES
 	Real->draw();
 	Est->draw();
@@ -92,4 +80,22 @@ void Grid::draw() {
 		glVertex2f(-1.0, i);
 		glEnd();
 	}
+}
+void Grid::GeneratePoints(int n) {
+	Neuron *a;
+	int i = 0;
+	a = new Neuron(0, 0, true);
+	Inventory.add(a);
+	float v = (float)Vertical, h = (float)Horizontal, x, y;
+	do {
+		y = (float)((rand() % (int)(2 * v)) - v);
+		x = (float)((rand() % (int)(2 * h)) - h);
+		//cout << "New Point: " << x << " " << y << endl;
+		if (!Inventory.Contains(x,y)) { a = new Neuron(x, y);  Inventory.add(a); i++; }
+	} while (i < n);
+}
+void Grid::Setup(){
+	
+}
+void Grid::Step(){
 }

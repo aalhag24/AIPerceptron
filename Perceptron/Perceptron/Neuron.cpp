@@ -3,33 +3,31 @@
 
 /** CONSTRUCTORS **/
 Neuron::Neuron() {
-	Px = Py = APx = APy = 0.0;
-	CR = 1.0f; CG = CB = 0.0f;
+	P = new Point(0.0f, 0.0f);
+	P->SetColor(1.0f, 0.0f, 0.0f);
+
 	Active = false; length = 2;
-	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 	cout << "New Defualt Point" << endl;
 }
 Neuron::Neuron(float x, float y) {
-	Px = x; Py = y;
-	CR = 1.0f; CG = CB = 0.0f;
+	P = new Point(x, y);
+	P->SetColor(1.0f, 0.0f, 0.0f);
 	Active = false; length = 2;
-	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 }
 Neuron::Neuron(float x, float y, bool correct) {
-	Px = x; Py = y;
-	if (correct) { CG = 1.0f; CR = CB = 0.0f; }
-	else { CR = 1.0f; CG = CB = 0.0f; }
+	P = new Point(x, y);
+	if (correct) { P->SetColor(0.0f, 1.0f, 0.0f); }
+	else { P->SetColor(1.0f, 0.0f, 0.0f); }
 	Active = correct; length = 2;
-	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 }
-Neuron::Neuron(const Neuron &p) {
-	Px = p.Px; Py = p.Py;
-	APx = p.APx; APy = p.APy;
+Neuron::Neuron(const Neuron &N) {
+	P = N.P;
+	P->SetColor(N.P->CR, N.P->CG, N.P->CB);
 
-	if (p.GetState()) { CG = 1.0f; CR = CB = 0.0f; }
-	else { CR = 1.0f; CG = CB = 0.0f; }
-	length = p.GetL();
-	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
+	if (N.GetState()) { P->SetColor(0.0f, 1.0f, 0.0f); }
+	else { P->SetColor(1.0f, 0.0f, 0.0f); }
+	length = N.GetL();
+
 	cout << "New Copy Point" << endl;
 }
 Neuron::~Neuron() {
@@ -38,27 +36,27 @@ Neuron::~Neuron() {
 }
 
 /** GETTERS AND SETTERS **/
-float Neuron::GetX()const { return Px; }
-float Neuron::GetY()const { return Py; }
+float Neuron::GetX()const { return P->Px; }
+float Neuron::GetY()const { return P->Py; }
 bool Neuron::GetState()const { return Active; }
 int Neuron::GetL() const { return length; }
 
-void Neuron::SetX(float x) { Px = x; }
-void Neuron::SetY(float y) { Py = y; }
+void Neuron::SetX(float x) { P->Px = x; }
+void Neuron::SetY(float y) { P->Py = y; }
 void Neuron::SetState(bool correct) {
 	Active = correct;
-	if (correct) { CR = 0.0f; CG = 1.0f; }
-	else { CG = 0.0f; CR = 1.0f; }
+	if (correct) { P->SetColor(0.0f, 1.0f, 0.0f); }
+	else { P->SetColor(1.0f, 0.0f, 0.0f); }
 }
 
 void Neuron::RandomizeWeight() {
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < length; i++) {
 		weight[i] = (rand() % 200 - 100) / 100;
 	}
 }
 int Neuron::guess(float inputs[]){
 	float sum = 0.0;
-	for (int i = 0; i < 2; i++) {
+	for (int i = 0; i < length; i++) {
 		sum += inputs[i] * weight[i];
 	}
 	int output = sign(sum);
@@ -72,7 +70,7 @@ int Neuron::sign(float s){
 }
 
 void Neuron::drawAt(float X, float Y) {
-	glColor3f(CR, CG, CB);
+	glColor3f(P->CR, P->CG, P->CB);
 	glBegin(GL_POINTS);
 	glVertex3f(X, Y, 0.0);
 	glEnd();
@@ -91,16 +89,16 @@ void Neuron::drawAt(float X, float Y) {
 	glEnd();
 }
 void Neuron::draw(int h, int v) {
-	drawAt(Px / (float)h, Py / (float)v);
+	drawAt(P->Px / (float)h, P->Py / (float)v);
 }
 
 bool Neuron::operator==(const Neuron &a)const {
-	if (this->Px == a.Px && this->Py == a.Py)
+	if (this->P->Px == a.P->Px && this->P->Py == a.P->Py)
 		return true;
 	return false;
 }
 bool Neuron::contain(float x, float y){
-	if (this->Px == x && this->Py == y)
+	if (this->P->Px == x && this->P->Py == y)
 		return true;
 	return false;
 }

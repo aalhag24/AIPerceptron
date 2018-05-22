@@ -7,6 +7,7 @@
 class Grid {
 	int Vertical;
 	int Horizontal;
+	float inputs[2] = { -1.0, 0.5 };
 
 	Stash Inventory;
 	Line *Real;
@@ -26,6 +27,8 @@ public:
 
 	void draw();
 	void GeneratePoints(int);
+	void Setup();
+	void Step();
 };
 
 
