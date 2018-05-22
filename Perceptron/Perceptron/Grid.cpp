@@ -16,20 +16,22 @@ Grid::Grid() {
 		Real->setup(Horizontal);
 	Est = new Line(Vertical, false);
 		Est->setup(Horizontal);
-
+	Perceptron = new Neuron(50, Horizontal, Vertical);
 }
-Grid::Grid(int x, int y) {
+Grid::Grid(int a, int x, int y) {
 	Horizontal = x;
 	Vertical = y;
 
 	Real = new Line(Vertical, true);
 	Est = new Line(Vertical, false);
+	Perceptron = new Neuron(a, Horizontal, Vertical);
 }
 Grid::Grid(const Grid & Old) {
 	Vertical = Old.GetVertical();
 	Horizontal = Old.GetHorizontal();
 }
 Grid::~Grid() {
+	delete Perceptron;
 	delete Real;
 	delete Est;
 	cout << " Deleting Grid" << endl;
@@ -44,7 +46,7 @@ void Grid::SetHorizontal(int a) { Horizontal = a; }
 
 void Grid::draw() {
 	///DRAW POINTS as normal
-	Inventory.Draw(Horizontal, Vertical);
+	Perceptron->draw(Horizontal, Vertical);
 
 	///DRAW LINES
 	Real->draw();
@@ -80,19 +82,6 @@ void Grid::draw() {
 		glVertex2f(-1.0, i);
 		glEnd();
 	}
-}
-void Grid::GeneratePoints(int n) {
-	Neuron *a;
-	int i = 0;
-	a = new Neuron(0, 0, true);
-	Inventory.add(a);
-	float v = (float)Vertical, h = (float)Horizontal, x, y;
-	do {
-		y = (float)((rand() % (int)(2 * v)) - v);
-		x = (float)((rand() % (int)(2 * h)) - h);
-		//cout << "New Point: " << x << " " << y << endl;
-		if (!Inventory.Contains(x,y)) { a = new Neuron(x, y);  Inventory.add(a); i++; }
-	} while (i < n);
 }
 void Grid::Setup(){
 	

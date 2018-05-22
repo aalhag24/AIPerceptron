@@ -16,8 +16,7 @@ App::App(const char* label, int x, int y, int w, int h) : GlutApp(label, x, y, w
 	mx = 0.0;
 	my = 0.0;
 
-	Layout = new Grid();
-	Layout->GeneratePoints(50);
+	Layout = new Grid(50,16,16);
 
 	//Apply Timing For AI
 	app_timer(1);

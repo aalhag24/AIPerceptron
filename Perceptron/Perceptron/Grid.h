@@ -7,15 +7,14 @@
 class Grid {
 	int Vertical;
 	int Horizontal;
-	float inputs[2] = { -1.0, 0.5 };
 
-	Stash Inventory;
+	Neuron *Perceptron;
 	Line *Real;
 	Line *Est;
 
 public:
 	Grid();
-	Grid(int, int);
+	Grid(int, int, int);
 	Grid(const Grid&);
 	~Grid();
 
@@ -26,10 +25,8 @@ public:
 	void SetHorizontal(int);
 
 	void draw();
-	void GeneratePoints(int);
 	void Setup();
 	void Step();
 };
-
 
 #endif // !GRID_H
