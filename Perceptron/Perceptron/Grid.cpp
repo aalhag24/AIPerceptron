@@ -42,16 +42,16 @@ void Grid::SetVertical(int b) { Vertical = b; }
 void Grid::SetHorizontal(int a) { Horizontal = a; }
 
 void Grid::GeneratePoints(int n) {
-	Point *a;
+	Neuron *a;
 	int i = 0;
-	a = new Point(0, 0, true);
+	a = new Neuron(0, 0, true);
 	Inventory.add(a);
 	float v = (float)Vertical, h = (float)Horizontal, x, y;
 	do {
 		y = (float)((rand() % (int)(2 * v)) - v);
 		x = (float)((rand() % (int)(2 * h)) - h);
 		//cout << "New Point: " << x << " " << y << endl;
-		if (!Inventory.Contains(x,y)) { a = new Point(x, y);  Inventory.add(a); i++; }
+		if (!Inventory.Contains(x,y)) { a = new Neuron(x, y);  Inventory.add(a); i++; }
 	} while (i < n);
 }
 void Grid::draw() {

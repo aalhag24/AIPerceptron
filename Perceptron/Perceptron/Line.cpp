@@ -4,6 +4,8 @@
 #include <ctime>
 #include <cmath>
 
+using namespace std;
+
 Line::Line(int v, bool s = false){
 	if (s) { CB = 1.0; CR = 0.0; }
 	else { CR = 1.0; CB = 0.0; }

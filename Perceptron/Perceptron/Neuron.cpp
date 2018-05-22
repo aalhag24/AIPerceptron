@@ -1,55 +1,62 @@
 #include "stdafx.h"
-#include "Point.h"
+#include "Neuron.h"
 
 /** CONSTRUCTORS **/
-Point::Point() {
+Neuron::Neuron() {
 	Px = Py = APx = APy = 0.0;
 	CR = 1.0f; CG = CB = 0.0f;
+	Active = false; length = 2;
 	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 	cout << "New Defualt Point" << endl;
 }
-Point::Point(float x, float y) {
+Neuron::Neuron(float x, float y) {
 	Px = x; Py = y;
 	CR = 1.0f; CG = CB = 0.0f;
+	Active = false; length = 2;
 	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 }
-Point::Point(float x, float y, bool correct) {
+Neuron::Neuron(float x, float y, bool correct) {
 	Px = x; Py = y;
 	if (correct) { CG = 1.0f; CR = CB = 0.0f; }
 	else { CR = 1.0f; CG = CB = 0.0f; }
+	Active = correct; length = 2;
 	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 }
-Point::Point(const Point &p) {
+Neuron::Neuron(const Neuron &p) {
 	Px = p.Px; Py = p.Py;
 	APx = p.APx; APy = p.APy;
-	CR = p.CR; CG = CB = p.CG;
+
+	if (p.GetState()) { CG = 1.0f; CR = CB = 0.0f; }
+	else { CR = 1.0f; CG = CB = 0.0f; }
+	length = p.GetL();
 	//Image = new TexRect("Green.png", "Red.png", Px, Py, 0.05, 0.05);
 	cout << "New Copy Point" << endl;
 }
-Point::~Point() {
+Neuron::~Neuron() {
 	//delete Image;
 	cout << "~Point()" << endl;
 }
 
 /** GETTERS AND SETTERS **/
-float Point::GetX()const { return Px; }
-float Point::GetY()const { return Py; }
-bool  Point::GetState()const { return Active; }
+float Neuron::GetX()const { return Px; }
+float Neuron::GetY()const { return Py; }
+bool Neuron::GetState()const { return Active; }
+int Neuron::GetL() const { return length; }
 
-void Point::SetX(float x) { Px = x; }
-void Point::SetY(float y) { Py = y; }
-void Point::SetState(bool correct) {
+void Neuron::SetX(float x) { Px = x; }
+void Neuron::SetY(float y) { Py = y; }
+void Neuron::SetState(bool correct) {
 	Active = correct;
 	if (correct) { CR = 0.0f; CG = 1.0f; }
 	else { CG = 0.0f; CR = 1.0f; }
 }
 
-void Point::RandomizeWeight() {
+void Neuron::RandomizeWeight() {
 	for (int i = 0; i < 2; i++) {
 		weight[i] = (rand() % 200 - 100) / 100;
 	}
 }
-int Point::guess(float inputs[]){
+int Neuron::guess(float inputs[]){
 	float sum = 0.0;
 	for (int i = 0; i < 2; i++) {
 		sum += inputs[i] * weight[i];
@@ -57,14 +64,14 @@ int Point::guess(float inputs[]){
 	int output = sign(sum);
 	return output;
 }
-int Point::sign(float s){
+int Neuron::sign(float s){
 	if (s < 0)
 		return -1;
 	else
 		return 1;
 }
 
-void Point::drawAt(float X, float Y) {
+void Neuron::drawAt(float X, float Y) {
 	glColor3f(CR, CG, CB);
 	glBegin(GL_POINTS);
 	glVertex3f(X, Y, 0.0);
@@ -73,7 +80,7 @@ void Point::drawAt(float X, float Y) {
 	float radius = 0.015f;
 	float x = X, y = Y;
 
-	glColor3f(0.2, 0.2, 0.6);
+	glColor3f(0.3, 0.3, 0.5);
 	glBegin(GL_LINE_LOOP);
 	for (int i = 0; i <= 300; i++) {
 		float angle = 2.0f * M_PI * i / 300.0;
@@ -83,43 +90,43 @@ void Point::drawAt(float X, float Y) {
 	}
 	glEnd();
 }
-void Point::draw(int h, int v) {
+void Neuron::draw(int h, int v) {
 	drawAt(Px / (float)h, Py / (float)v);
 }
 
-bool Point::operator==(const Point &a)const {
+bool Neuron::operator==(const Neuron &a)const {
 	if (this->Px == a.Px && this->Py == a.Py)
 		return true;
 	return false;
 }
-bool Point::contain(float x, float y){
+bool Neuron::contain(float x, float y){
 	if (this->Px == x && this->Py == y)
 		return true;
 	return false;
 }
 
 /** PointStash Functions **/
-PointStash::PointStash() {
+Stash::Stash() {
 	List.clear();
 }
-PointStash::~PointStash() {
+Stash::~Stash() {
 	cout << "~PointStash()" << endl;
 }
-void PointStash::add(Point *a) {
+void Stash::add(Neuron *a) {
 	List.push_back(a);
 }
-void PointStash::Draw(int h, int v) {
-	for (std::vector<Point*>::iterator it = List.begin(); it != List.end(); ++it)
+void Stash::Draw(int h, int v) {
+	for (std::vector<Neuron*>::iterator it = List.begin(); it != List.end(); ++it)
 		(*it)->draw(h, v);
 }
 
-bool PointStash::Contains(Point *a) {
-	for (std::vector<Point*>::iterator it = List.begin(); it != List.end(); ++it)
+bool Stash::Contains(Neuron *a) {
+	for (std::vector<Neuron*>::iterator it = List.begin(); it != List.end(); ++it)
 		if ((*it) == a) return true;
 	return false;
 }
-bool PointStash::Contains(float x, float y){
-	for (std::vector<Point*>::iterator it = List.begin(); it != List.end(); ++it)
+bool Stash::Contains(float x, float y){
+	for (std::vector<Neuron*>::iterator it = List.begin(); it != List.end(); ++it)
 		if ((*it)->contain(x,y)) return true;
 	return false;
 }

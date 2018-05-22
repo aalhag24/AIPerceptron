@@ -1,14 +1,14 @@
 #ifndef GRID_H
 #define GRID_H
 
-#include "Point.h"
+#include "Neuron.h"
 #include "Line.h"
 
 class Grid {
 	int Vertical;
 	int Horizontal;
 
-	PointStash Inventory;
+	Stash Inventory;
 	Line *Real;
 	Line *Est;
 
