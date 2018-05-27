@@ -45,7 +45,7 @@ void App::mouseDown(float x, float y) {
 	mx = x;
 	my = y;
 
-	cout << mx << " " << my << endl;
+	std::cout << mx << " " << my << std::endl;
 
 	///MainFrame->Handle(x, y);
 	// Redraw the scene

@@ -8,7 +8,7 @@ class Grid {
 	int Vertical;
 	int Horizontal;
 
-	Neuron *Perceptron;
+	Neuron<int, int, std::string> *Perceptron;
 	Line *Real;
 	Line *Est;
 

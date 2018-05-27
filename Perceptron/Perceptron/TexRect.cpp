@@ -41,7 +41,7 @@ TexRect::TexRect(const char* filename, const char* filename2, float x = 0, float
 	);
 
 
-	cout << "4" << endl;
+	std::cout << "4" << std::endl;
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

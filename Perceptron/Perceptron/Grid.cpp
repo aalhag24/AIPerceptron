@@ -12,26 +12,28 @@ Grid::Grid() {
 	Vertical = 16;
 
 	srand(time(0));
-	cout << "Real ";
-	Real = new Line(Vertical, true);
+	Perceptron = new Neuron<int, int, std::string>(50, Horizontal, Vertical);
+
+	std::cout << "Real ";
+	Real = new Line(Perceptron->getSlope(), Perceptron->getYIntercept(), true);
 		Real->setup(Horizontal);
-	cout << "Estimate ";
-	Est = new Line(Vertical, false);
+	std::cout << "Estimate ";
+	Est = new Line(false);
 		Est->setup(Horizontal);
-	Perceptron = new Neuron(50, Horizontal, Vertical);
 }
 Grid::Grid(int a, int x, int y) {
 	Horizontal = x;
 	Vertical = y;
 
 	srand(time(0));
-	cout << "Real ";
-	Real = new Line(Vertical, true);
+	Perceptron = new Neuron<int, int, std::string>(a, Horizontal, Vertical);
+
+	std::cout << "Real ";
+	Real = new Line(Perceptron->getSlope(), Perceptron->getYIntercept(), true);
 		Real->setup(Horizontal);
-	cout << "Estimate ";
-	Est = new Line(Vertical, false);
+		std::cout << "Estimate ";
+	Est = new Line(false);
 		Est->setup(Horizontal);
-	Perceptron = new Neuron(a, Horizontal, Vertical);
 }
 Grid::Grid(const Grid & Old) {
 	Vertical = Old.GetVertical();
@@ -41,7 +43,7 @@ Grid::~Grid() {
 	delete Perceptron;
 	delete Real;
 	delete Est;
-	cout << " Deleting Grid " << endl;
+	std::cout << " Deleting Grid " << std::endl;
 }
 
 /// Getters and Setters
