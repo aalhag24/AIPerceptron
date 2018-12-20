@@ -24,7 +24,7 @@
     <ProjectGuid>{02DE35F0-4755-42CA-ADD2-7D6F943D2824}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Perceptron</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -79,9 +79,9 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
-    <ReferencePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
-    <LibraryPath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\x64;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(IncludePath)</IncludePath>
+    <ReferencePath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\x64;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(ReferencePath)</ReferencePath>
+    <LibraryPath>D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\x64;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\windows;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\SOIL;D:\Archieve\Coding\Source\Repos\AIPerceptron\Perceptron\Perceptron\freeglut;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
